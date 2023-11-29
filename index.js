@@ -17,6 +17,18 @@ app.use(express.urlencoded({
 app.use(express.json())
 
 //rotas
+app.get('/limpartarefas' , (requisicao, resposta) =>{
+    const sql = 'DELETE  FROM tarefas'
+
+    conexao.query(sql, (erro) =>{
+        if(erro) {
+            return console.log(erro)
+        }
+
+        resposta.redirect('/')
+    })
+})
+
 app.post('/completar', (requisicao,resposta) =>{
     const id = requisicao.body.id
 
@@ -34,7 +46,6 @@ app.post('/completar', (requisicao,resposta) =>{
         resposta.redirect('/')
     })
 })
-
 
 app.post('/descompletar', (requisicao,resposta) =>{
     const id = requisicao.body.id
